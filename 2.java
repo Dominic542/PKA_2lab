@@ -1,47 +1,62 @@
-public class DirtyCodeExample {
-    public static void main(String args[])
-    {int x=10;
-        int y=20;System.out.println(x+y);if(y>x)System.out.println("y is greater than x");else
-        System.out.println("x is greater than or equal to y");}
+public class CleanCodeExample {
 
-    private void DisplayTheSum(int sum) {
-        System.out.println("The sum is: " + sum);
+    public static void useConsistentFormatting() {
+        int i = 5;
+        int j = 10;
+        System.out.println("Sum: " + sum(i, j));
     }
+    public static void main(String[] args) {
+        int x = 10;
+        int y = 20;
 
-    private void sum(int num1, int num2) {
-        int result = num1 + num2;
-    }
+        int sum = x + y;
+        System.out.println("Sum: " + sum);
 
-    private void dontUseMeaningfulVariableNames() {
-        int a = 5;
-        int b = 7;
+        if (y > x) {
+            System.out.println("y is greater than x");
+        } else {
+            System.out.println("x is greater than or equal to y");
+        }
+        separateCodeIntoMethods();
+        useConsistentFormatting();
+        avoidMagicNumbers();
+        handleExceptionProperly();
     }
-    
-    public void useSingleCharacterVariableNames() {
-        int a = 10;
-        int b = 20;
-    }
-
-    public void putAllCodeInSingleMethod() {
+    public static void separateCodeIntoMethods() {
         int num1 = 5;
         int num2 = 7;
-        int total = num1 + num2;
-        System.out.println("Total: " + total);
+        int total = sum(num1, num2);
+        System.out.println("Sum: " + total);
     }
-
-    public void useInconsistentFormatting(){int i=5;
-        int j=10;System.out.println(i+j);}
-
-    public void useMagicNumbers() {
-        int sum = 0;
-        for (int i = 0; i < 10; i++) {
-            sum += i;
-        }
+    public static void avoidMagicNumbers() {
+        int sum = calculateSumUpTo(10);
+        System.out.println("Sum: " + sum);
     }
-
-    public void ignoreExceptionHandling() {
+    public static void handleExceptionProperly() {
         int dividend = 10;
         int divisor = 0;
-        int result = dividend / divisor;
+
+        try {
+            int result = divide(dividend, divisor);
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Error: Division by zero is not allowed.");
+        }
+    }
+    private static int sum(int num1, int num2) {
+        return num1 + num2;
+    }
+    private static int calculateSumUpTo(int limit) {
+        int sum = 0;
+        for (int i = 0; i <= limit; i++) {
+            sum += i;
+        }
+        return sum;
+    }
+    private static int divide(int dividend, int divisor) {
+        if (divisor == 0) {
+            throw new ArithmeticException("Division by zero is not allowed.");
+        }
+        return dividend / divisor;
     }
 }
